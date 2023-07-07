@@ -85,7 +85,7 @@ class Register{
     }
 
 
-    //!Update Data Procedure. 
+    //! Update Data Procedure. 
 
     public function updateStudent($data, $file, $id){
 
@@ -158,7 +158,7 @@ class Register{
 
         } else {
 
-           //!Update Data Query Starts. 
+           //! Update Data Query Starts. 
                                         
             $query = "UPDATE student_registration SET name = '$name', email = '$email', phone = '$phone', photo = '$upload_image', address = '$address' WHERE id = '$id'";
 
