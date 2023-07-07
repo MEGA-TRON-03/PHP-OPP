@@ -22,6 +22,7 @@ class Database{
     }
 
     public function dbConnect(){
+
         $this->link = mysqli_connect($this->host,$this->user,$this->password,$this->database);
 
         if(!$this->link){
@@ -35,6 +36,7 @@ class Database{
     //! Insert Data Query Starts Here.
 
     public function insert($query){
+
         $result = mysqli_query($this->link,$query) or die ($this->link->error.__LINE__);
         if($result){
             return $result;
@@ -48,6 +50,7 @@ class Database{
     //! Select Data Query  Starts Here.
 
     public function select($query){
+
         $result = mysqli_query($this->link,$query) or die ($this->link->error.__LINE__);
         if(mysqli_num_rows($result) > 0){
             return $result;
@@ -61,6 +64,7 @@ class Database{
     //! Update Data Query  Starts Here.
 
     public function update($query){
+
         $result = mysqli_query($this->link,$query) or die ($this->link->error.__LINE__);
         if($result){
             return $result;
@@ -74,6 +78,7 @@ class Database{
     //! Delete Data Query  Starts Here.
 
     public function delete($query){
+        
         $result = mysqli_query($this->link,$query) or die ($this->link->error.__LINE__);
         if($result){
             return $result;

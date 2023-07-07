@@ -6,26 +6,26 @@ class Register{
         $this->db = new Database();
     }
 
-    //# data insert procedure
+    //! data insert procedure
 
     public function addRegister($data, $file){
-        $name     =  $data['name'];
-        $email = $data['email'];
-        $phone = $data['phone'];
-        $address = $data['address'];
+        $name        = $data['name'];
+        $email       = $data['email'];
+        $phone       = $data['phone'];
+        $address     = $data['address'];
 
         //! Image Uploading Procedure Starts.
         
-        $permission = array('jpg', 'png', 'jpeg', 'gif');
-        $image_name = $file['photo']['name'];
-        $image_size = $file['photo']['size'];
-        $tmp_file = $file['photo']['tmp_name'];
+        $permission   = array('jpg', 'png', 'jpeg', 'gif');
+        $image_name   = $file['photo']['name'];
+        $image_size   = $file['photo']['size'];
+        $tmp_file     = $file['photo']['tmp_name'];
 
-        $divided = explode('.', $image_name);
-        $image_ext = strtolower(end($divided));
-        $rand_1 = rand (0,99999999);
-        $rand_2 = rand (0,99999999);
-        $final_image = $rand_1.'_'.$rand_2.'.'.$image_ext;
+        $divided      = explode('.', $image_name);
+        $image_ext    = strtolower(end($divided));
+        $rand_1       = rand (0,99999999);
+        $rand_2       = rand (0,99999999);
+        $final_image  = $rand_1.'_'.$rand_2.'.'.$image_ext;
         $upload_image = "img/".$final_image;
 
         //@ Image Uploading Procedure Ends.
@@ -33,12 +33,12 @@ class Register{
 
         if (empty($name)|| empty($email)|| empty($phone)|| empty($address)|| empty($image_name)){
             
-            $massage = "Field must not be empty!";
-            return $massage;
+           $massage = "Field must not be empty!";
+           return $massage;
 
         }elseif ($image_size > 1048567){
             
-        $massage = "File size must be less than 1 MB!";
+            $massage = "File size must be less than 1 MB!";
             return $massage; 
 
         }elseif (in_array($image_ext, $permission) == false){
@@ -57,11 +57,15 @@ class Register{
             $result = $this->db->insert($query);
 
             if ($result){
+
                 $massage = "Registration successful!";
                 return $massage;
+
             }else{
+
                 $massage = "Registration failed!";
                 return $massage;
+
             }
 
             //@ Insert Data Query Ends.
@@ -71,17 +75,21 @@ class Register{
     //! Select Data Query Starts.
 
     public function studentInfo(){
+
         $qurrey = "SELECT * FROM student_registration ORDER BY id ASC";
         $result = $this->db->select($qurrey);
         return $result;
+
     }
 
     //@ Select Data Query Ends.
 
     public function getStudentByID($id){
+
         $qurrey = "SELECT * FROM student_registration WHERE id = '$id'";
         $result = $this->db->select($qurrey);
         return $result;
+
     }
 
 
@@ -89,21 +97,21 @@ class Register{
 
     public function updateStudent($data, $file, $id){
 
-        $name = $data['name'];
-        $email = $data['email'];
-        $phone = $data['phone'];
-        $address = $data['address'];
+        $name         = $data['name'];
+        $email        = $data['email'];
+        $phone        = $data['phone'];
+        $address      = $data['address'];
         
-        $permission = array('jpg', 'png', 'jpeg', 'gif');
-        $image_name = $file['photo']['name'];
-        $image_size = $file['photo']['size'];
-        $tmp_file = $file['photo']['tmp_name'];
+        $permission   = array('jpg', 'png', 'jpeg', 'gif');
+        $image_name   = $file['photo']['name'];
+        $image_size   = $file['photo']['size'];
+        $tmp_file     = $file['photo']['tmp_name'];
 
-        $divided = explode('.', $image_name);
-        $image_ext = strtolower(end($divided));
-        $rand_1 = rand (0,99999999);
-        $rand_2 = rand (0,99999999);
-        $final_image = $rand_1.'_'.$rand_2.'.'.$image_ext;
+        $divided      = explode('.', $image_name);
+        $image_ext    = strtolower(end($divided));
+        $rand_1       = rand (0,99999999);
+        $rand_2       = rand (0,99999999);
+        $final_image  = $rand_1.'_'.$rand_2.'.'.$image_ext;
         $upload_image = "img/".$final_image;
 
         if (empty($name)|| empty($email)|| empty($phone)|| empty($address)){
@@ -137,7 +145,7 @@ class Register{
                     move_uploaded_file($tmp_file, $upload_image);
         
                     
-                    //!Update Data Query Starts. 
+                    //! Update Data Query Starts. 
                     
                                         
                     $query = "UPDATE student_registration SET name = '$name', email = '$email', phone = '$phone', photo = '$upload_image', address = '$address' WHERE id = '$id'";
